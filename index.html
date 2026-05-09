@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Fargekode hjelper</title>
+<title>Fargekode Hjelper</title>
 
 <style>
 body{
@@ -43,6 +43,7 @@ h2{
   font-weight:bold;
 }
 
+/* MODES */
 .modeButtons{
   display:flex;
   flex-wrap:wrap;
@@ -51,16 +52,44 @@ h2{
 .modeBtn{
   flex:1;
   padding:12px;
-  background:#2a2a2a;
-  color:white;
   border:none;
   font-weight:bold;
+  color:white;
 }
 
 .modeBtn.active{
-  background:#4f8cff;
+  outline:3px solid yellow;
+  position:relative;
+  z-index:2;
 }
 
+.modeBtn.tia{
+  background:#1f4aff;
+}
+
+.modeBtn.telenor{
+  background:#ffffff;
+  color:black;
+}
+
+.modeBtn.hvit{
+  background:#ffffff;
+  color:black;
+}
+
+.modeBtn.rod{
+  background:#e60000;
+}
+
+.modeBtn.svart{
+  background:#111111;
+}
+
+.modeBtn.custom{
+  background:#111111;
+}
+
+/* TUBES */
 .tubeButtons{
   display:flex;
   flex-wrap:wrap;
@@ -82,6 +111,7 @@ h2{
   display:none;
 }
 
+/* MIRROR */
 .mirrorBtn{
   width:100%;
   padding:10px;
@@ -95,6 +125,7 @@ h2{
   background:#4f8cff;
 }
 
+/* FIBERS */
 .fiber{
   padding:14px;
   text-align:center;
@@ -107,7 +138,7 @@ h2{
 .green{background:#1ea500}
 .brown{background:#6b3e26}
 .gray{background:#888}
-.white{background:#f0f0f0;color:black}
+.white{background:#ffffff;color:black}
 .red{background:#e60000}
 .black{background:#111}
 .yellow{background:#ffd700;color:black}
@@ -158,59 +189,41 @@ h2{
 
 <body>
 
-<h2>Fargekode hjelperen</h2>
+<h2>Fargekode Hjelper</h2>
 
 <button id="mirrorBtn" class="mirrorBtn">Speil A ↔ B: AV</button>
 
 <div class="container">
 
 <div class="col">
-
-<div class="title" contenteditable="true">
-ENDE A
-</div>
-
+<div class="title" contenteditable="true">ENDE A</div>
 <div id="leftModes" class="modeButtons"></div>
-
 <select id="leftTubeSelect" class="tubeSelect"></select>
-
 <div id="leftTubes" class="tubeButtons"></div>
-
 <div id="left"></div>
-
 </div>
 
 <div class="col">
-
-<div class="title" contenteditable="true">
-ENDE B
-</div>
-
+<div class="title" contenteditable="true">ENDE B</div>
 <div id="rightModes" class="modeButtons"></div>
-
 <select id="rightTubeSelect" class="tubeSelect"></select>
-
 <div id="rightTubes" class="tubeButtons"></div>
-
 <div id="right"></div>
-
 </div>
 
 </div>
 
 <script>
 
-/* 🔥 MODES */
 const modes = [
   "TIA",
   "Telenor",
-  "Hvit",
   "Rød",
+  "Hvit",
   "Svart",
   "CUSTOM"
 ];
 
-/* 🔥 COLORS */
 const colors = [
   "blue",
   "orange",
@@ -227,101 +240,48 @@ const colors = [
 ];
 
 const names = {
-blue:"Blå",
-orange:"Oransje",
-green:"Grønn",
-brown:"Brun",
-gray:"Grå",
-white:"Hvit",
-red:"Rød",
-black:"Sort",
-yellow:"Gul",
-violet:"Fiolett",
-pink:"Rosa",
-aqua:"Turkis"
+  blue:"Blå",
+  orange:"Oransje",
+  green:"Grønn",
+  brown:"Brun",
+  gray:"Grå",
+  white:"Hvit",
+  red:"Rød",
+  black:"Sort",
+  yellow:"Gul",
+  violet:"Fiolett",
+  pink:"Rosa",
+  aqua:"Turkis"
 };
 
-/* 🔥 FIBER PROFILER */
 const baseModes = {
 
-TIA:[
-"blue",
-"orange",
-"green",
-"brown",
-"gray",
-"white",
-"red",
-"black",
-"yellow",
-"violet",
-"pink",
-"aqua"
-],
+  TIA:[
+    "blue","orange","green","brown","gray","white",
+    "red","black","yellow","violet","pink","aqua"
+  ],
 
-"Telenor":[
-"white",
-"red",
-"yellow",
-"green",
-"blue",
-"gray",
-"brown",
-"black",
-"violet",
-"aqua",
-"orange",
-"pink"
-],
+  "Telenor":[
+    "white","red","yellow","green","blue","gray",
+    "brown","black","violet","aqua","orange","pink"
+  ],
 
-"Hvit":[
-"white",
-"red",
-"yellow",
-"green",
-"blue",
-"gray",
-"brown",
-"black",
-"violet",
-"orange",
-"pink",
-"aqua"
-],
+  "Hvit":[
+    "white","red","yellow","green","blue","gray",
+    "brown","black","violet","orange","pink","aqua"
+  ],
 
-"Rød":[
-"red",
-"blue",
-"white",
-"green",
-"yellow",
-"gray",
-"orange",
-"brown",
-"violet",
-"black",
-"pink",
-"aqua"
-],
+  "Rød":[
+    "red","blue","white","green","yellow","gray",
+    "orange","brown","violet","black","pink","aqua"
+  ],
 
-"Svart":[
-"black",
-"brown",
-"red",
-"orange",
-"yellow",
-"green",
-"blue",
-"violet",
-"gray",
-"white",
-"pink",
-"aqua"
-]
-
+  "Svart":[
+    "black","brown","red","orange","yellow","green",
+    "blue","violet","gray","white","pink","aqua"
+  ]
 };
 
-/* 🔥 STATE */
 let state = {
   leftMode:"TIA",
   rightMode:"TIA",
@@ -333,11 +293,10 @@ let state = {
 let customLeft = [...baseModes.TIA];
 let customRight = [...baseModes.TIA];
 
-/* 🔥 MIRROR */
+/* MIRROR */
 const mirrorBtn = document.getElementById("mirrorBtn");
 
 mirrorBtn.onclick = ()=>{
-
   state.mirror = !state.mirror;
 
   mirrorBtn.innerText =
@@ -346,18 +305,23 @@ mirrorBtn.onclick = ()=>{
   mirrorBtn.classList.toggle("active");
 };
 
-/* 🔥 BUILD MODES */
+/* BUILD MODES */
 function buildModes(id,side){
 
   const el=document.getElementById(id);
-
   el.innerHTML="";
 
   modes.forEach(m=>{
 
     let b=document.createElement("button");
-
     b.className="modeBtn";
+
+    if(m==="TIA") b.classList.add("tia");
+    if(m==="Telenor") b.classList.add("telenor");
+    if(m==="Hvit") b.classList.add("hvit");
+    if(m==="Rød") b.classList.add("rod");
+    if(m==="Svart") b.classList.add("svart");
+    if(m==="CUSTOM") b.classList.add("custom");
 
     b.innerText=m;
 
@@ -373,14 +337,12 @@ function buildModes(id,side){
     el.appendChild(b);
 
   });
-
 }
 
-/* 🔥 BUILD TUBES */
+/* BUILD TUBES */
 function buildTubes(btnId,selectId,side){
 
   const btnWrap=document.getElementById(btnId);
-
   const select=document.getElementById(selectId);
 
   btnWrap.innerHTML="";
@@ -389,9 +351,7 @@ function buildTubes(btnId,selectId,side){
   for(let i=1;i<=12;i++){
 
     let b=document.createElement("button");
-
     b.className="tubeBtn";
-
     b.innerText="R"+i;
 
     if(state[side+"Tube"]===i){
@@ -406,9 +366,7 @@ function buildTubes(btnId,selectId,side){
     btnWrap.appendChild(b);
 
     let o=document.createElement("option");
-
     o.value=i;
-
     o.innerText="Rør "+i;
 
     if(i===state[side+"Tube"]){
@@ -416,25 +374,18 @@ function buildTubes(btnId,selectId,side){
     }
 
     select.appendChild(o);
-
   }
 
   select.onchange=(e)=>{
     state[side+"Tube"]=parseInt(e.target.value);
     render();
   };
-
 }
 
-/* 🔥 POPUP */
+/* POPUP */
 function closePopup(){
-
-  document
-    .querySelectorAll(".popup")
-    .forEach(p=>p.remove());
-
+  document.querySelectorAll(".popup").forEach(p=>p.remove());
   document.body.classList.remove("popup-open");
-
 }
 
 function openPopup(i,side){
@@ -442,60 +393,45 @@ function openPopup(i,side){
   closePopup();
 
   let p=document.createElement("div");
-
   p.className="popup";
-
   p.onclick=(e)=>e.stopPropagation();
 
   colors.forEach(c=>{
 
     let d=document.createElement("div");
-
     d.className="popupItem "+c;
 
     let nr=((state[side+"Tube"]-1)*12)+(i+1);
-
     d.innerText=nr+" "+names[c];
 
     d.onclick=()=>{
 
       if(side==="left"){
-
         customLeft[i]=c;
-
         if(state.mirror){
           customRight[i]=c;
         }
-
       }else{
-
         customRight[i]=c;
-
         if(state.mirror){
           customLeft[i]=c;
         }
-
       }
 
       closePopup();
-
       render();
 
-      /* 🔥 AUTO NEXT */
       if(i<11){
         setTimeout(()=>{
           openPopup(i+1,side);
         },100);
       }
-
     };
 
     p.appendChild(d);
-
   });
 
   document.body.appendChild(p);
-
   document.body.classList.add("popup-open");
 
   setTimeout(()=>{
@@ -503,28 +439,17 @@ function openPopup(i,side){
   },50);
 
   function outsideClick(e){
-
     if(!p.contains(e.target)){
-
       closePopup();
-
-      document.removeEventListener(
-        "click",
-        outsideClick,
-        true
-      );
-
+      document.removeEventListener("click",outsideClick,true);
     }
-
   }
-
 }
 
-/* 🔥 RENDER */
+/* RENDER */
 function renderSide(id,mode,custom,side){
 
   const el=document.getElementById(id);
-
   el.innerHTML="";
 
   const data =
@@ -535,11 +460,9 @@ function renderSide(id,mode,custom,side){
   data.forEach((c,i)=>{
 
     let d=document.createElement("div");
-
     d.className="fiber "+c;
 
     let nr=((state[side+"Tube"]-1)*12)+(i+1);
-
     d.innerText=nr+" "+names[c];
 
     if(mode==="CUSTOM"){
@@ -547,43 +470,16 @@ function renderSide(id,mode,custom,side){
     }
 
     el.appendChild(d);
-
   });
-
 }
 
 function render(){
-
   buildModes("leftModes","left");
-
   buildModes("rightModes","right");
-
-  buildTubes(
-    "leftTubes",
-    "leftTubeSelect",
-    "left"
-  );
-
-  buildTubes(
-    "rightTubes",
-    "rightTubeSelect",
-    "right"
-  );
-
-  renderSide(
-    "left",
-    state.leftMode,
-    customLeft,
-    "left"
-  );
-
-  renderSide(
-    "right",
-    state.rightMode,
-    customRight,
-    "right"
-  );
-
+  buildTubes("leftTubes","leftTubeSelect","left");
+  buildTubes("rightTubes","rightTubeSelect","right");
+  renderSide("left",state.leftMode,customLeft,"left");
+  renderSide("right",state.rightMode,customRight,"right");
 }
 
 render();
