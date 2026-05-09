@@ -216,7 +216,7 @@ h2{
 <script>
 
 const modes = [
-  "TIA",
+  "Blå",
   "Telenor",
   "Rød",
   "Hvit",
@@ -256,7 +256,7 @@ const names = {
 
 const baseModes = {
 
-  TIA:[
+  "Blå":[
     "blue","orange","green","brown","gray","white",
     "red","black","yellow","violet","pink","aqua"
   ],
@@ -283,17 +283,16 @@ const baseModes = {
 };
 
 let state = {
-  leftMode:"TIA",
-  rightMode:"TIA",
+  leftMode:"Blå",
+  rightMode:"Blå",
   leftTube:1,
   rightTube:1,
   mirror:false
 };
 
-let customLeft = [...baseModes.TIA];
-let customRight = [...baseModes.TIA];
+let customLeft = [...baseModes["Blå"]];
+let customRight = [...baseModes["Blå"]];
 
-/* MIRROR */
 const mirrorBtn = document.getElementById("mirrorBtn");
 
 mirrorBtn.onclick = ()=>{
@@ -305,7 +304,6 @@ mirrorBtn.onclick = ()=>{
   mirrorBtn.classList.toggle("active");
 };
 
-/* BUILD MODES */
 function buildModes(id,side){
 
   const el=document.getElementById(id);
@@ -316,7 +314,7 @@ function buildModes(id,side){
     let b=document.createElement("button");
     b.className="modeBtn";
 
-    if(m==="TIA") b.classList.add("tia");
+    if(m==="Blå") b.classList.add("tia");
     if(m==="Telenor") b.classList.add("telenor");
     if(m==="Hvit") b.classList.add("hvit");
     if(m==="Rød") b.classList.add("rod");
@@ -339,7 +337,6 @@ function buildModes(id,side){
   });
 }
 
-/* BUILD TUBES */
 function buildTubes(btnId,selectId,side){
 
   const btnWrap=document.getElementById(btnId);
@@ -382,7 +379,6 @@ function buildTubes(btnId,selectId,side){
   };
 }
 
-/* POPUP */
 function closePopup(){
   document.querySelectorAll(".popup").forEach(p=>p.remove());
   document.body.classList.remove("popup-open");
@@ -446,7 +442,6 @@ function openPopup(i,side){
   }
 }
 
-/* RENDER */
 function renderSide(id,mode,custom,side){
 
   const el=document.getElementById(id);
